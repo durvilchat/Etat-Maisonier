@@ -7,14 +7,14 @@ package com.flysoft.maisonier.entites;
 
 import android.support.annotation.Size;
 
+import com.flysoft.maisonier.dataBase.Maisonier;
 import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.Database;
 import com.raizlabs.android.dbflow.annotation.NotNull;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
-@Table(database = Database.class)
+@Table(database = Maisonier.class)
 public class AdresseMail extends BaseModel {
 
 
