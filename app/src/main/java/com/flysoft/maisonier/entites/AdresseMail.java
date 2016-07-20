@@ -31,6 +31,7 @@ public class AdresseMail extends BaseModel {
     @Size(min = 1, max = 255)
     @Column(name = "password", length = 255)
     private String password;
+
     @JoinColumn(name = "serveur_mail", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private ServeurMail serveurMail;
