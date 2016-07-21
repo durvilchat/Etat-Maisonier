@@ -5,39 +5,21 @@
  */
 package com.flysoft.maisonier.entites;
 
+
+import android.support.annotation.Size;
+
+import com.flysoft.maisonier.dataBase.Maisonier;
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.NotNull;
+import com.raizlabs.android.dbflow.annotation.OneToMany;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-
-/**
- * @author nono
- */
-@Entity
-@Table(name = "consommation_eau", catalog = "maisonier", schema = "public")
-@XmlRootElement
-@NamedQueries({
-        @NamedQuery(name = "ConsommationEau.findAll", query = "SELECT c FROM ConsommationEau c"),
-        @NamedQuery(name = "ConsommationEau.findById", query = "SELECT c FROM ConsommationEau c WHERE c.id = :id"),
-        @NamedQuery(name = "ConsommationEau.findByAncienIndex", query = "SELECT c FROM ConsommationEau c WHERE c.ancienIndex = :ancienIndex"),
-        @NamedQuery(name = "ConsommationEau.findByDatePaiement", query = "SELECT c FROM ConsommationEau c WHERE c.datePaiement = :datePaiement"),
-        @NamedQuery(name = "ConsommationEau.findByDateReleve", query = "SELECT c FROM ConsommationEau c WHERE c.dateReleve = :dateReleve"),
-        @NamedQuery(name = "ConsommationEau.findByDescription", query = "SELECT c FROM ConsommationEau c WHERE c.description = :description"),
-        @NamedQuery(name = "ConsommationEau.findByMontantPayer", query = "SELECT c FROM ConsommationEau c WHERE c.montantPayer = :montantPayer"),
-        @NamedQuery(name = "ConsommationEau.findByNouveauIndex", query = "SELECT c FROM ConsommationEau c WHERE c.nouveauIndex = :nouveauIndex"),
-        @NamedQuery(name = "ConsommationEau.findByObservation", query = "SELECT c FROM ConsommationEau c WHERE c.observation = :observation")})
+@Table(database = Maisonier.class)
 public class ConsommationEau extends BaseModel {
 
 
@@ -49,10 +31,10 @@ public class ConsommationEau extends BaseModel {
     @Column(name = "ancien_index")
     private int ancienIndex;
     @Column(name = "date_paiement")
-    @Temporal(TemporalType.DATE)
+
     private Date datePaiement;
     @Column(name = "date_releve")
-    @Temporal(TemporalType.DATE)
+
     private Date dateReleve;
     @Size(max = 255)
     @Column(name = "description", length = 255)
@@ -213,29 +195,5 @@ public class ConsommationEau extends BaseModel {
         this.parametre = parametre;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ConsommationEau)) {
-            return false;
-        }
-        ConsommationEau other = (ConsommationEau) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "entites.ConsommationEau[ id=" + id + " ]";
-    }
 
 }

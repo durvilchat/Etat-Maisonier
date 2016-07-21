@@ -5,31 +5,19 @@
  */
 package com.flysoft.maisonier.entites;
 
+import android.support.annotation.Size;
+
+import com.flysoft.maisonier.dataBase.Maisonier;
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.NotNull;
+import com.raizlabs.android.dbflow.annotation.OneToMany;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-
-/**
- * @author nono
- */
-@Entity
-@Table(name = "type_charge", catalog = "maisonier", schema = "public", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"libelle"})})
-@XmlRootElement
-@NamedQueries({
-        @NamedQuery(name = "TypeCharge.findAll", query = "SELECT t FROM TypeCharge t"),
-        @NamedQuery(name = "TypeCharge.findById", query = "SELECT t FROM TypeCharge t WHERE t.id = :id"),
-        @NamedQuery(name = "TypeCharge.findByLibelle", query = "SELECT t FROM TypeCharge t WHERE t.libelle = :libelle"),
-        @NamedQuery(name = "TypeCharge.findByMontant", query = "SELECT t FROM TypeCharge t WHERE t.montant = :montant")})
+@Table(database = Maisonier.class)
 public class TypeCharge extends BaseModel {
 
 
@@ -91,30 +79,4 @@ public class TypeCharge extends BaseModel {
     public void setChargeList(List<Charge> chargeList) {
         this.chargeList = chargeList;
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TypeCharge)) {
-            return false;
-        }
-        TypeCharge other = (TypeCharge) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "entites.TypeCharge[ id=" + id + " ]";
-    }
-
 }

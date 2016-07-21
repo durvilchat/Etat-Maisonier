@@ -5,34 +5,18 @@
  */
 package com.flysoft.maisonier.entites;
 
+import android.support.annotation.Size;
+
+import com.flysoft.maisonier.dataBase.Maisonier;
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.NotNull;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-
-/**
- * @author nono
- */
-@Entity
-@Table(name = "telephone", catalog = "maisonier", schema = "public")
-@XmlRootElement
-@NamedQueries({
-        @NamedQuery(name = "Telephone.findAll", query = "SELECT t FROM Telephone t"),
-        @NamedQuery(name = "Telephone.findById", query = "SELECT t FROM Telephone t WHERE t.id = :id"),
-        @NamedQuery(name = "Telephone.findByFrequence", query = "SELECT t FROM Telephone t WHERE t.frequence = :frequence"),
-        @NamedQuery(name = "Telephone.findByMarque", query = "SELECT t FROM Telephone t WHERE t.marque = :marque"),
-        @NamedQuery(name = "Telephone.findByModele", query = "SELECT t FROM Telephone t WHERE t.modele = :modele"),
-        @NamedQuery(name = "Telephone.findByNumeroTelephone", query = "SELECT t FROM Telephone t WHERE t.numeroTelephone = :numeroTelephone"),
-        @NamedQuery(name = "Telephone.findByPort", query = "SELECT t FROM Telephone t WHERE t.port = :port"),
-        @NamedQuery(name = "Telephone.findByServerNumber", query = "SELECT t FROM Telephone t WHERE t.serverNumber = :serverNumber"),
-        @NamedQuery(name = "Telephone.findByTypeReseau", query = "SELECT t FROM Telephone t WHERE t.typeReseau = :typeReseau")})
+@Table(database = Maisonier.class)
 public class Telephone extends BaseModel {
 
 
@@ -159,30 +143,4 @@ public class Telephone extends BaseModel {
     public void setBoiteEnvoiList(List<BoiteEnvoi> boiteEnvoiList) {
         this.boiteEnvoiList = boiteEnvoiList;
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Telephone)) {
-            return false;
-        }
-        Telephone other = (Telephone) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "entites.Telephone[ id=" + id + " ]";
-    }
-
 }

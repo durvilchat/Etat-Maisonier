@@ -5,34 +5,19 @@
  */
 package com.flysoft.maisonier.entites;
 
+
+import android.support.annotation.Size;
+
+import com.flysoft.maisonier.dataBase.Maisonier;
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.NotNull;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-
-/**
- * @author nono
- */
-@Entity
-@Table(name = "personnel_privilege", catalog = "maisonier", schema = "public")
-@XmlRootElement
-@NamedQueries({
-        @NamedQuery(name = "PersonnelPrivilege.findAll", query = "SELECT p FROM PersonnelPrivilege p"),
-        @NamedQuery(name = "PersonnelPrivilege.findById", query = "SELECT p FROM PersonnelPrivilege p WHERE p.id = :id"),
-        @NamedQuery(name = "PersonnelPrivilege.findByDateAttrib", query = "SELECT p FROM PersonnelPrivilege p WHERE p.dateAttrib = :dateAttrib"),
-        @NamedQuery(name = "PersonnelPrivilege.findByDateRetrait", query = "SELECT p FROM PersonnelPrivilege p WHERE p.dateRetrait = :dateRetrait"),
-        @NamedQuery(name = "PersonnelPrivilege.findByDescription", query = "SELECT p FROM PersonnelPrivilege p WHERE p.description = :description"),
-        @NamedQuery(name = "PersonnelPrivilege.findByEtat", query = "SELECT p FROM PersonnelPrivilege p WHERE p.etat = :etat")})
+@Table(database = Maisonier.class)
 public class PersonnelPrivilege extends BaseModel {
 
 
@@ -140,30 +125,4 @@ public class PersonnelPrivilege extends BaseModel {
     public void setRolle(Rolle rolle) {
         this.rolle = rolle;
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PersonnelPrivilege)) {
-            return false;
-        }
-        PersonnelPrivilege other = (PersonnelPrivilege) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "entites.PersonnelPrivilege[ id=" + id + " ]";
-    }
-
 }

@@ -5,52 +5,20 @@
  */
 package com.flysoft.maisonier.entites;
 
+
+import android.support.annotation.Size;
+
+import com.flysoft.maisonier.dataBase.Maisonier;
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.NotNull;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-
-/**
- * @author nono
- */
-@Entity
-@Table(name = "habitant", catalog = "maisonier", schema = "public", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"nom", "prenom"})})
-@XmlRootElement
-@NamedQueries({
-        @NamedQuery(name = "Habitant.findAll", query = "SELECT h FROM Habitant h"),
-        @NamedQuery(name = "Habitant.findById", query = "SELECT h FROM Habitant h WHERE h.id = :id"),
-        @NamedQuery(name = "Habitant.findByDateDelivraisonCni", query = "SELECT h FROM Habitant h WHERE h.dateDelivraisonCni = :dateDelivraisonCni"),
-        @NamedQuery(name = "Habitant.findByDateNaissance", query = "SELECT h FROM Habitant h WHERE h.dateNaissance = :dateNaissance"),
-        @NamedQuery(name = "Habitant.findByEmail1", query = "SELECT h FROM Habitant h WHERE h.email1 = :email1"),
-        @NamedQuery(name = "Habitant.findByEmail2", query = "SELECT h FROM Habitant h WHERE h.email2 = :email2"),
-        @NamedQuery(name = "Habitant.findByGenre", query = "SELECT h FROM Habitant h WHERE h.genre = :genre"),
-        @NamedQuery(name = "Habitant.findByLieuDelivraisonCni", query = "SELECT h FROM Habitant h WHERE h.lieuDelivraisonCni = :lieuDelivraisonCni"),
-        @NamedQuery(name = "Habitant.findByLieuNaissance", query = "SELECT h FROM Habitant h WHERE h.lieuNaissance = :lieuNaissance"),
-        @NamedQuery(name = "Habitant.findByNom", query = "SELECT h FROM Habitant h WHERE h.nom = :nom"),
-        @NamedQuery(name = "Habitant.findByNomDeLaMere", query = "SELECT h FROM Habitant h WHERE h.nomDeLaMere = :nomDeLaMere"),
-        @NamedQuery(name = "Habitant.findByNomDuPere", query = "SELECT h FROM Habitant h WHERE h.nomDuPere = :nomDuPere"),
-        @NamedQuery(name = "Habitant.findByNumeroCNI", query = "SELECT h FROM Habitant h WHERE h.numeroCNI = :numeroCNI"),
-        @NamedQuery(name = "Habitant.findByPhoto", query = "SELECT h FROM Habitant h WHERE h.photo = :photo"),
-        @NamedQuery(name = "Habitant.findByPrenom", query = "SELECT h FROM Habitant h WHERE h.prenom = :prenom"),
-        @NamedQuery(name = "Habitant.findByProfession", query = "SELECT h FROM Habitant h WHERE h.profession = :profession"),
-        @NamedQuery(name = "Habitant.findByTel1", query = "SELECT h FROM Habitant h WHERE h.tel1 = :tel1"),
-        @NamedQuery(name = "Habitant.findByTel2", query = "SELECT h FROM Habitant h WHERE h.tel2 = :tel2"),
-        @NamedQuery(name = "Habitant.findByTel3", query = "SELECT h FROM Habitant h WHERE h.tel3 = :tel3"),
-        @NamedQuery(name = "Habitant.findByTel4", query = "SELECT h FROM Habitant h WHERE h.tel4 = :tel4"),
-        @NamedQuery(name = "Habitant.findByTitre", query = "SELECT h FROM Habitant h WHERE h.titre = :titre")})
+@Table(database = Maisonier.class)
 public class Habitant extends BaseModel {
 
 
@@ -58,10 +26,10 @@ public class Habitant extends BaseModel {
     @Column(name = "id")
     private Integer id;
     @Column(name = "date_delivraison_cni")
-    @Temporal(TemporalType.DATE)
+
     private Date dateDelivraisonCni;
     @Column(name = "date_naissance")
-    @Temporal(TemporalType.DATE)
+
     private Date dateNaissance;
     @Size(max = 255)
     @Column(name = "email1", length = 255)
@@ -340,31 +308,6 @@ public class Habitant extends BaseModel {
 
     public void setConsommationElectriciteList(List<ConsommationElectricite> consommationElectriciteList) {
         this.consommationElectriciteList = consommationElectriciteList;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Habitant)) {
-            return false;
-        }
-        Habitant other = (Habitant) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "entites.Habitant[ id=" + id + " ]";
     }
 
 }

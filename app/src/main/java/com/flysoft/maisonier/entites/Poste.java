@@ -5,30 +5,19 @@
  */
 package com.flysoft.maisonier.entites;
 
+import android.support.annotation.Size;
+
+import com.flysoft.maisonier.dataBase.Maisonier;
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.NotNull;
+import com.raizlabs.android.dbflow.annotation.OneToMany;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-
-/**
- * @author nono
- */
-@Entity
-@Table(name = "poste", catalog = "maisonier", schema = "public")
-@XmlRootElement
-@NamedQueries({
-        @NamedQuery(name = "Poste.findAll", query = "SELECT p FROM Poste p"),
-        @NamedQuery(name = "Poste.findById", query = "SELECT p FROM Poste p WHERE p.id = :id"),
-        @NamedQuery(name = "Poste.findByDescription", query = "SELECT p FROM Poste p WHERE p.description = :description"),
-        @NamedQuery(name = "Poste.findByEtat", query = "SELECT p FROM Poste p WHERE p.etat = :etat"),
-        @NamedQuery(name = "Poste.findByLibelle", query = "SELECT p FROM Poste p WHERE p.libelle = :libelle")})
+@Table(database = Maisonier.class)
 public class Poste extends BaseModel {
 
 
@@ -103,30 +92,4 @@ public class Poste extends BaseModel {
     public void setPersonnelList(List<Personnel> personnelList) {
         this.personnelList = personnelList;
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Poste)) {
-            return false;
-        }
-        Poste other = (Poste) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "entites.Poste[ id=" + id + " ]";
-    }
-
 }

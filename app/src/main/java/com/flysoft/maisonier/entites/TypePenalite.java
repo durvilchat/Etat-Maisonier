@@ -5,34 +5,18 @@
  */
 package com.flysoft.maisonier.entites;
 
+import android.support.annotation.Size;
+
+import com.flysoft.maisonier.dataBase.Maisonier;
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.NotNull;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-
-/**
- * @author nono
- */
-@Entity
-@Table(name = "type_penalite", catalog = "maisonier", schema = "public", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"libelle"})})
-@XmlRootElement
-@NamedQueries({
-        @NamedQuery(name = "TypePenalite.findAll", query = "SELECT t FROM TypePenalite t"),
-        @NamedQuery(name = "TypePenalite.findById", query = "SELECT t FROM TypePenalite t WHERE t.id = :id"),
-        @NamedQuery(name = "TypePenalite.findByDelai", query = "SELECT t FROM TypePenalite t WHERE t.delai = :delai"),
-        @NamedQuery(name = "TypePenalite.findByEtat", query = "SELECT t FROM TypePenalite t WHERE t.etat = :etat"),
-        @NamedQuery(name = "TypePenalite.findByLibelle", query = "SELECT t FROM TypePenalite t WHERE t.libelle = :libelle"),
-        @NamedQuery(name = "TypePenalite.findByTaux", query = "SELECT t FROM TypePenalite t WHERE t.taux = :taux")})
+@Table(database = Maisonier.class)
 public class TypePenalite extends BaseModel {
 
 
@@ -123,29 +107,5 @@ public class TypePenalite extends BaseModel {
         this.penaliteList = penaliteList;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TypePenalite)) {
-            return false;
-        }
-        TypePenalite other = (TypePenalite) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "entites.TypePenalite[ id=" + id + " ]";
-    }
 
 }

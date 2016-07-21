@@ -5,29 +5,16 @@
  */
 package com.flysoft.maisonier.entites;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
+import android.support.annotation.Size;
 
-/**
- * @author nono
- */
-@Entity
-@Table(name = "recette", catalog = "maisonier", schema = "public")
-@XmlRootElement
-@NamedQueries({
-        @NamedQuery(name = "Recette.findAll", query = "SELECT r FROM Recette r"),
-        @NamedQuery(name = "Recette.findById", query = "SELECT r FROM Recette r WHERE r.id = :id"),
-        @NamedQuery(name = "Recette.findByDepot", query = "SELECT r FROM Recette r WHERE r.depot = :depot"),
-        @NamedQuery(name = "Recette.findByEau", query = "SELECT r FROM Recette r WHERE r.eau = :eau"),
-        @NamedQuery(name = "Recette.findByElectricite", query = "SELECT r FROM Recette r WHERE r.electricite = :electricite"),
-        @NamedQuery(name = "Recette.findByMois", query = "SELECT r FROM Recette r WHERE r.mois = :mois"),
-        @NamedQuery(name = "Recette.findByReferenc", query = "SELECT r FROM Recette r WHERE r.referenc = :referenc")})
+import com.flysoft.maisonier.dataBase.Maisonier;
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.NotNull;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+
+@Table(database = Maisonier.class)
 public class Recette extends BaseModel {
 
 
@@ -113,29 +100,6 @@ public class Recette extends BaseModel {
         this.referenc = referenc;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Recette)) {
-            return false;
-        }
-        Recette other = (Recette) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "entites.Recette[ id=" + id + " ]";
-    }
 
 }

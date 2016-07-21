@@ -5,41 +5,19 @@
  */
 package com.flysoft.maisonier.entites;
 
+import android.support.annotation.Size;
+
+import com.flysoft.maisonier.dataBase.Maisonier;
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.NotNull;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-
-/**
- * @author nono
- */
-@Entity
-@Table(name = "logement", catalog = "maisonier", schema = "public", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"reference"})})
-@XmlRootElement
-@NamedQueries({
-        @NamedQuery(name = "Logement.findAll", query = "SELECT l FROM Logement l"),
-        @NamedQuery(name = "Logement.findById", query = "SELECT l FROM Logement l WHERE l.id = :id"),
-        @NamedQuery(name = "Logement.findByDatecreation", query = "SELECT l FROM Logement l WHERE l.datecreation = :datecreation"),
-        @NamedQuery(name = "Logement.findByDescription", query = "SELECT l FROM Logement l WHERE l.description = :description"),
-        @NamedQuery(name = "Logement.findByEtat", query = "SELECT l FROM Logement l WHERE l.etat = :etat"),
-        @NamedQuery(name = "Logement.findByPrixMax", query = "SELECT l FROM Logement l WHERE l.prixMax = :prixMax"),
-        @NamedQuery(name = "Logement.findByPrixMin", query = "SELECT l FROM Logement l WHERE l.prixMin = :prixMin"),
-        @NamedQuery(name = "Logement.findByReference", query = "SELECT l FROM Logement l WHERE l.reference = :reference")})
+@Table(database = Maisonier.class)
 public class Logement extends BaseModel {
 
 
@@ -49,7 +27,7 @@ public class Logement extends BaseModel {
 
     @NotNull
     @Column(name = "datecreation")
-    @Temporal(TemporalType.DATE)
+
     private Date datecreation;
     @Size(max = 255)
     @Column(name = "description", length = 255)
@@ -216,31 +194,6 @@ public class Logement extends BaseModel {
 
     public void setCaracteristiqueLogementList(List<CaracteristiqueLogement> caracteristiqueLogementList) {
         this.caracteristiqueLogementList = caracteristiqueLogementList;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Logement)) {
-            return false;
-        }
-        Logement other = (Logement) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "entites.Logement[ id=" + id + " ]";
     }
 
 }

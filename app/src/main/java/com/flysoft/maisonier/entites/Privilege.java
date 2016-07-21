@@ -5,33 +5,18 @@
  */
 package com.flysoft.maisonier.entites;
 
+import android.support.annotation.Size;
+
+import com.flysoft.maisonier.dataBase.Maisonier;
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.OneToMany;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-
-/**
- * @author nono
- */
-@Entity
-@Table(name = "privilege", catalog = "maisonier", schema = "public", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"nomprivilege"})})
-@XmlRootElement
-@NamedQueries({
-        @NamedQuery(name = "Privilege.findAll", query = "SELECT p FROM Privilege p"),
-        @NamedQuery(name = "Privilege.findById", query = "SELECT p FROM Privilege p WHERE p.id = :id"),
-        @NamedQuery(name = "Privilege.findByDescription", query = "SELECT p FROM Privilege p WHERE p.description = :description"),
-        @NamedQuery(name = "Privilege.findByNomprivilege", query = "SELECT p FROM Privilege p WHERE p.nomprivilege = :nomprivilege")})
+@Table(database = Maisonier.class)
 public class Privilege extends BaseModel {
 
 
@@ -141,30 +126,4 @@ public class Privilege extends BaseModel {
     public void setRolePrivilegeList(List<RolePrivilege> rolePrivilegeList) {
         this.rolePrivilegeList = rolePrivilegeList;
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Privilege)) {
-            return false;
-        }
-        Privilege other = (Privilege) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "entites.Privilege[ id=" + id + " ]";
-    }
-
 }

@@ -5,45 +5,17 @@
  */
 package com.flysoft.maisonier.entites;
 
+import com.flysoft.maisonier.dataBase.Maisonier;
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.NotNull;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-
-/**
- * @author nono
- */
-@Entity
-@Table(name = "parametre", catalog = "maisonier", schema = "public")
-@XmlRootElement
-@NamedQueries({
-        @NamedQuery(name = "Parametre.findAll", query = "SELECT p FROM Parametre p"),
-        @NamedQuery(name = "Parametre.findById", query = "SELECT p FROM Parametre p WHERE p.id = :id"),
-        @NamedQuery(name = "Parametre.findByCablage", query = "SELECT p FROM Parametre p WHERE p.cablage = :cablage"),
-        @NamedQuery(name = "Parametre.findByDateEnregistrement", query = "SELECT p FROM Parametre p WHERE p.dateEnregistrement = :dateEnregistrement"),
-        @NamedQuery(name = "Parametre.findByDateModification", query = "SELECT p FROM Parametre p WHERE p.dateModification = :dateModification"),
-        @NamedQuery(name = "Parametre.findByEntretientEau", query = "SELECT p FROM Parametre p WHERE p.entretientEau = :entretientEau"),
-        @NamedQuery(name = "Parametre.findByEntretientElectricite", query = "SELECT p FROM Parametre p WHERE p.entretientElectricite = :entretientElectricite"),
-        @NamedQuery(name = "Parametre.findByEtat", query = "SELECT p FROM Parametre p WHERE p.etat = :etat"),
-        @NamedQuery(name = "Parametre.findByPrixUnitaireEau", query = "SELECT p FROM Parametre p WHERE p.prixUnitaireEau = :prixUnitaireEau"),
-        @NamedQuery(name = "Parametre.findByPrixUnitaireElectricite", query = "SELECT p FROM Parametre p WHERE p.prixUnitaireElectricite = :prixUnitaireElectricite"),
-        @NamedQuery(name = "Parametre.findByRepertoirePhotoBatiment", query = "SELECT p FROM Parametre p WHERE p.repertoirePhotoBatiment = :repertoirePhotoBatiment"),
-        @NamedQuery(name = "Parametre.findByRepertoirePhotoHabitant", query = "SELECT p FROM Parametre p WHERE p.repertoirePhotoHabitant = :repertoirePhotoHabitant"),
-        @NamedQuery(name = "Parametre.findByRepertoirePhotoLogement", query = "SELECT p FROM Parametre p WHERE p.repertoirePhotoLogement = :repertoirePhotoLogement"),
-        @NamedQuery(name = "Parametre.findByRepertoirePhotoPersonnel", query = "SELECT p FROM Parametre p WHERE p.repertoirePhotoPersonnel = :repertoirePhotoPersonnel"),
-        @NamedQuery(name = "Parametre.findByTVA", query = "SELECT p FROM Parametre p WHERE p.tVA = :tVA"),
-        @NamedQuery(name = "Parametre.findByTauxRemise", query = "SELECT p FROM Parametre p WHERE p.tauxRemise = :tauxRemise")})
+@Table(database = Maisonier.class)
 public class Parametre extends BaseModel {
 
 
@@ -287,29 +259,5 @@ public class Parametre extends BaseModel {
         this.remiseList = remiseList;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Parametre)) {
-            return false;
-        }
-        Parametre other = (Parametre) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "entites.Parametre[ id=" + id + " ]";
-    }
 
 }

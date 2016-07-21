@@ -5,32 +5,19 @@
  */
 package com.flysoft.maisonier.entites;
 
+
+import android.support.annotation.Size;
+
+import com.flysoft.maisonier.dataBase.Maisonier;
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.NotNull;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-
-/**
- * @author nono
- */
-@Entity
-@Table(name = "mouchard", catalog = "maisonier", schema = "public")
-@XmlRootElement
-@NamedQueries({
-        @NamedQuery(name = "Mouchard.findAll", query = "SELECT m FROM Mouchard m"),
-        @NamedQuery(name = "Mouchard.findById", query = "SELECT m FROM Mouchard m WHERE m.id = :id"),
-        @NamedQuery(name = "Mouchard.findByAction", query = "SELECT m FROM Mouchard m WHERE m.action = :action"),
-        @NamedQuery(name = "Mouchard.findByDateAction", query = "SELECT m FROM Mouchard m WHERE m.dateAction = :dateAction")})
+@Table(database = Maisonier.class)
 public class Mouchard extends BaseModel {
 
 
@@ -94,31 +81,6 @@ public class Mouchard extends BaseModel {
 
     public void setUtilisateur(CompteUtilisateur utilisateur) {
         this.utilisateur = utilisateur;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Mouchard)) {
-            return false;
-        }
-        Mouchard other = (Mouchard) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "entites.Mouchard[ id=" + id + " ]";
     }
 
 }

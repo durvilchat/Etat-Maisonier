@@ -8,13 +8,16 @@ package com.flysoft.maisonier.entites;
 
 import android.support.annotation.Size;
 
+import com.flysoft.maisonier.dataBase.Maisonier;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.NotNull;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
 import java.util.List;
 
+@Table(database = Maisonier.class)
 public class ArticleBail extends BaseModel {
 
 

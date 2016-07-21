@@ -5,26 +5,15 @@
  */
 package com.flysoft.maisonier.entites;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
+import android.support.annotation.Size;
 
-/**
- * @author nono
- */
-@Entity
-@Table(name = "caracteristique_logement", catalog = "maisonier", schema = "public")
-@XmlRootElement
-@NamedQueries({
-        @NamedQuery(name = "CaracteristiqueLogement.findAll", query = "SELECT c FROM CaracteristiqueLogement c"),
-        @NamedQuery(name = "CaracteristiqueLogement.findById", query = "SELECT c FROM CaracteristiqueLogement c WHERE c.id = :id"),
-        @NamedQuery(name = "CaracteristiqueLogement.findByValeur", query = "SELECT c FROM CaracteristiqueLogement c WHERE c.valeur = :valeur")})
+import com.flysoft.maisonier.dataBase.Maisonier;
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+
+@Table(database = Maisonier.class)
 public class CaracteristiqueLogement extends BaseModel {
 
 
@@ -80,29 +69,5 @@ public class CaracteristiqueLogement extends BaseModel {
         this.logement = logement;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof CaracteristiqueLogement)) {
-            return false;
-        }
-        CaracteristiqueLogement other = (CaracteristiqueLogement) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "entites.CaracteristiqueLogement[ id=" + id + " ]";
-    }
 
 }

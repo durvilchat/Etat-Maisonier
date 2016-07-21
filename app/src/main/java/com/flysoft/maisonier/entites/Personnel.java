@@ -5,43 +5,19 @@
  */
 package com.flysoft.maisonier.entites;
 
+
+import android.support.annotation.Size;
+
+import com.flysoft.maisonier.dataBase.Maisonier;
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-
-/**
- * @author nono
- */
-@Entity
-@Table(name = "personnel", catalog = "maisonier", schema = "public", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"nom", "prenom"}),
-        @UniqueConstraint(columnNames = {"matricule"})})
-@XmlRootElement
-@NamedQueries({
-        @NamedQuery(name = "Personnel.findAll", query = "SELECT p FROM Personnel p"),
-        @NamedQuery(name = "Personnel.findById", query = "SELECT p FROM Personnel p WHERE p.id = :id"),
-        @NamedQuery(name = "Personnel.findByDateCreation", query = "SELECT p FROM Personnel p WHERE p.dateCreation = :dateCreation"),
-        @NamedQuery(name = "Personnel.findByMatricule", query = "SELECT p FROM Personnel p WHERE p.matricule = :matricule"),
-        @NamedQuery(name = "Personnel.findByNom", query = "SELECT p FROM Personnel p WHERE p.nom = :nom"),
-        @NamedQuery(name = "Personnel.findByPhoto", query = "SELECT p FROM Personnel p WHERE p.photo = :photo"),
-        @NamedQuery(name = "Personnel.findByPrenom", query = "SELECT p FROM Personnel p WHERE p.prenom = :prenom"),
-        @NamedQuery(name = "Personnel.findByTheme", query = "SELECT p FROM Personnel p WHERE p.theme = :theme")})
+@Table(database = Maisonier.class)
 public class Personnel extends BaseModel {
 
 
@@ -179,30 +155,4 @@ public class Personnel extends BaseModel {
     public void setPoste(Poste poste) {
         this.poste = poste;
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Personnel)) {
-            return false;
-        }
-        Personnel other = (Personnel) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "entites.Personnel[ id=" + id + " ]";
-    }
-
 }

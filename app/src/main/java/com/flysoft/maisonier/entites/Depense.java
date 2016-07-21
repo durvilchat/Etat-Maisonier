@@ -5,34 +5,19 @@
  */
 package com.flysoft.maisonier.entites;
 
+
+import android.support.annotation.Size;
+
+import com.flysoft.maisonier.dataBase.Maisonier;
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.NotNull;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-
-/**
- * @author nono
- */
-@Entity
-@Table(name = "depense", catalog = "maisonier", schema = "public")
-@XmlRootElement
-@NamedQueries({
-        @NamedQuery(name = "Depense.findAll", query = "SELECT d FROM Depense d"),
-        @NamedQuery(name = "Depense.findById", query = "SELECT d FROM Depense d WHERE d.id = :id"),
-        @NamedQuery(name = "Depense.findByDateEnregistrement", query = "SELECT d FROM Depense d WHERE d.dateEnregistrement = :dateEnregistrement"),
-        @NamedQuery(name = "Depense.findByDescription", query = "SELECT d FROM Depense d WHERE d.description = :description"),
-        @NamedQuery(name = "Depense.findByDesignation", query = "SELECT d FROM Depense d WHERE d.designation = :designation"),
-        @NamedQuery(name = "Depense.findByMontant", query = "SELECT d FROM Depense d WHERE d.montant = :montant")})
+@Table(database = Maisonier.class)
 public class Depense extends BaseModel {
 
 
@@ -138,29 +123,5 @@ public class Depense extends BaseModel {
         this.mois = mois;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Depense)) {
-            return false;
-        }
-        Depense other = (Depense) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "entites.Depense[ id=" + id + " ]";
-    }
 
 }

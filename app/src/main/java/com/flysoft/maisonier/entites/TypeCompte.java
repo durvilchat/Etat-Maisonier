@@ -5,32 +5,20 @@
  */
 package com.flysoft.maisonier.entites;
 
+
+import android.support.annotation.Size;
+
+import com.flysoft.maisonier.dataBase.Maisonier;
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.NotNull;
+import com.raizlabs.android.dbflow.annotation.OneToMany;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-
-/**
- * @author nono
- */
-@Entity
-@Table(name = "type_compte", catalog = "maisonier", schema = "public", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"libelle"})})
-@XmlRootElement
-@NamedQueries({
-        @NamedQuery(name = "TypeCompte.findAll", query = "SELECT t FROM TypeCompte t"),
-        @NamedQuery(name = "TypeCompte.findById", query = "SELECT t FROM TypeCompte t WHERE t.id = :id"),
-        @NamedQuery(name = "TypeCompte.findByDescription", query = "SELECT t FROM TypeCompte t WHERE t.description = :description"),
-        @NamedQuery(name = "TypeCompte.findByLibelle", query = "SELECT t FROM TypeCompte t WHERE t.libelle = :libelle")})
+@Table(database = Maisonier.class)
 public class TypeCompte extends BaseModel {
 
 
@@ -92,30 +80,4 @@ public class TypeCompte extends BaseModel {
     public void setCompteList(List<Compte> compteList) {
         this.compteList = compteList;
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TypeCompte)) {
-            return false;
-        }
-        TypeCompte other = (TypeCompte) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "entites.TypeCompte[ id=" + id + " ]";
-    }
-
 }

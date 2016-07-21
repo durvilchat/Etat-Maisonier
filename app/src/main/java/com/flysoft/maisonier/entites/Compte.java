@@ -5,33 +5,12 @@
  */
 package com.flysoft.maisonier.entites;
 
+import com.flysoft.maisonier.dataBase.Maisonier;
+import com.raizlabs.android.dbflow.annotation.Table;
+
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlRootElement;
-
-/**
- * @author nono
- */
-@Entity
-@Table(name = "compte", catalog = "maisonier", schema = "public", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"type_compte", "occupation"})})
-@XmlRootElement
-@NamedQueries({
-        @NamedQuery(name = "Compte.findAll", query = "SELECT c FROM Compte c"),
-        @NamedQuery(name = "Compte.findById", query = "SELECT c FROM Compte c WHERE c.id = :id"),
-        @NamedQuery(name = "Compte.findByDateoperaion", query = "SELECT c FROM Compte c WHERE c.dateoperaion = :dateoperaion"),
-        @NamedQuery(name = "Compte.findBySolde", query = "SELECT c FROM Compte c WHERE c.solde = :solde")})
+@Table(database = Maisonier.class)
 public class Compte extends BaseModel {
 
 
@@ -39,7 +18,7 @@ public class Compte extends BaseModel {
     @Column(name = "id")
     private Integer id;
     @Column(name = "dateoperaion")
-    @Temporal(TemporalType.DATE)
+
     private Date dateoperaion;
 
     @NotNull
@@ -104,29 +83,6 @@ public class Compte extends BaseModel {
         this.typeCompte = typeCompte;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Compte)) {
-            return false;
-        }
-        Compte other = (Compte) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "entites.Compte[ id=" + id + " ]";
-    }
 
 }

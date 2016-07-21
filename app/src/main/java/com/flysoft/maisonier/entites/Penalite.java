@@ -5,37 +5,16 @@
  */
 package com.flysoft.maisonier.entites;
 
+import com.flysoft.maisonier.dataBase.Maisonier;
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.NotNull;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-
-/**
- * @author nono
- */
-@Entity
-@Table(name = "penalite", catalog = "maisonier", schema = "public", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"type_penalite", "occupation", "mois"})})
-@XmlRootElement
-@NamedQueries({
-        @NamedQuery(name = "Penalite.findAll", query = "SELECT p FROM Penalite p"),
-        @NamedQuery(name = "Penalite.findById", query = "SELECT p FROM Penalite p WHERE p.id = :id"),
-        @NamedQuery(name = "Penalite.findByDatePaiement", query = "SELECT p FROM Penalite p WHERE p.datePaiement = :datePaiement"),
-        @NamedQuery(name = "Penalite.findByEtat", query = "SELECT p FROM Penalite p WHERE p.etat = :etat"),
-        @NamedQuery(name = "Penalite.findByMontant", query = "SELECT p FROM Penalite p WHERE p.montant = :montant"),
-        @NamedQuery(name = "Penalite.findByMontantPayer", query = "SELECT p FROM Penalite p WHERE p.montantPayer = :montantPayer"),
-        @NamedQuery(name = "Penalite.findByObservation", query = "SELECT p FROM Penalite p WHERE p.observation = :observation")})
+@Table(database = Maisonier.class)
 public class Penalite extends BaseModel {
 
 
@@ -45,7 +24,7 @@ public class Penalite extends BaseModel {
 
     @NotNull
     @Column(name = "date_paiement")
-    @Temporal(TemporalType.DATE)
+
     private Date datePaiement;
 
     @NotNull
@@ -157,31 +136,6 @@ public class Penalite extends BaseModel {
 
     public void setTypePenalite(TypePenalite typePenalite) {
         this.typePenalite = typePenalite;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Penalite)) {
-            return false;
-        }
-        Penalite other = (Penalite) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "entites.Penalite[ id=" + id + " ]";
     }
 
 }

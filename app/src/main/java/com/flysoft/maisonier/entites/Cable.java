@@ -5,35 +5,19 @@
  */
 package com.flysoft.maisonier.entites;
 
+
+import android.support.annotation.Size;
+
+import com.flysoft.maisonier.dataBase.Maisonier;
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.NotNull;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-
-/**
- * @author nono
- */
-@Entity
-@Table(name = "cable", catalog = "maisonier", schema = "public", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"mois", "occupation"})})
-@XmlRootElement
-@NamedQueries({
-        @NamedQuery(name = "Cable.findAll", query = "SELECT c FROM Cable c"),
-        @NamedQuery(name = "Cable.findById", query = "SELECT c FROM Cable c WHERE c.id = :id"),
-        @NamedQuery(name = "Cable.findByDatePaiement", query = "SELECT c FROM Cable c WHERE c.datePaiement = :datePaiement"),
-        @NamedQuery(name = "Cable.findByMontantPayer", query = "SELECT c FROM Cable c WHERE c.montantPayer = :montantPayer"),
-        @NamedQuery(name = "Cable.findByObservation", query = "SELECT c FROM Cable c WHERE c.observation = :observation")})
+@Table(database = Maisonier.class)
 public class Cable extends BaseModel {
 
 
@@ -41,7 +25,7 @@ public class Cable extends BaseModel {
     @Column(name = "id")
     private Integer id;
     @Column(name = "date_paiement")
-    @Temporal(TemporalType.DATE)
+
     private Date datePaiement;
 
     @NotNull
@@ -128,29 +112,7 @@ public class Cable extends BaseModel {
         this.parametre = parametre;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Cable)) {
-            return false;
-        }
-        Cable other = (Cable) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
 
-    @Override
-    public String toString() {
-        return "entites.Cable[ id=" + id + " ]";
-    }
 
 }

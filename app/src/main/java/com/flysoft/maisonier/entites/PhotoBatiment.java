@@ -5,30 +5,16 @@
  */
 package com.flysoft.maisonier.entites;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
+import android.support.annotation.Size;
 
-/**
- * @author nono
- */
-@Entity
-@Table(name = "photo_batiment", catalog = "maisonier", schema = "public", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"nom"})})
-@XmlRootElement
-@NamedQueries({
-        @NamedQuery(name = "PhotoBatiment.findAll", query = "SELECT p FROM PhotoBatiment p"),
-        @NamedQuery(name = "PhotoBatiment.findById", query = "SELECT p FROM PhotoBatiment p WHERE p.id = :id"),
-        @NamedQuery(name = "PhotoBatiment.findByEtat", query = "SELECT p FROM PhotoBatiment p WHERE p.etat = :etat"),
-        @NamedQuery(name = "PhotoBatiment.findByNom", query = "SELECT p FROM PhotoBatiment p WHERE p.nom = :nom")})
+import com.flysoft.maisonier.dataBase.Maisonier;
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.NotNull;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+
+@Table(database = Maisonier.class)
 public class PhotoBatiment extends BaseModel {
 
 
@@ -92,30 +78,4 @@ public class PhotoBatiment extends BaseModel {
     public void setBatiment(Batiment batiment) {
         this.batiment = batiment;
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PhotoBatiment)) {
-            return false;
-        }
-        PhotoBatiment other = (PhotoBatiment) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "entites.PhotoBatiment[ id=" + id + " ]";
-    }
-
 }

@@ -5,44 +5,19 @@
  */
 package com.flysoft.maisonier.entites;
 
+import android.support.annotation.Size;
+
+import com.flysoft.maisonier.dataBase.Maisonier;
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.NotNull;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-
-/**
- * @author nono
- */
-@Entity
-@Table(name = "occupation", catalog = "maisonier", schema = "public")
-@XmlRootElement
-@NamedQueries({
-        @NamedQuery(name = "Occupation.findAll", query = "SELECT o FROM Occupation o"),
-        @NamedQuery(name = "Occupation.findById", query = "SELECT o FROM Occupation o WHERE o.id = :id"),
-        @NamedQuery(name = "Occupation.findByDateEntree", query = "SELECT o FROM Occupation o WHERE o.dateEntree = :dateEntree"),
-        @NamedQuery(name = "Occupation.findByDateSortie", query = "SELECT o FROM Occupation o WHERE o.dateSortie = :dateSortie"),
-        @NamedQuery(name = "Occupation.findByDescription", query = "SELECT o FROM Occupation o WHERE o.description = :description"),
-        @NamedQuery(name = "Occupation.findByEtat", query = "SELECT o FROM Occupation o WHERE o.etat = :etat"),
-        @NamedQuery(name = "Occupation.findByForfaitEau", query = "SELECT o FROM Occupation o WHERE o.forfaitEau = :forfaitEau"),
-        @NamedQuery(name = "Occupation.findByForfaitElectricte", query = "SELECT o FROM Occupation o WHERE o.forfaitElectricte = :forfaitElectricte"),
-        @NamedQuery(name = "Occupation.findByLoyerBase", query = "SELECT o FROM Occupation o WHERE o.loyerBase = :loyerBase"),
-        @NamedQuery(name = "Occupation.findByModePaiement", query = "SELECT o FROM Occupation o WHERE o.modePaiement = :modePaiement"),
-        @NamedQuery(name = "Occupation.findByPaieCable", query = "SELECT o FROM Occupation o WHERE o.paieCable = :paieCable"),
-        @NamedQuery(name = "Occupation.findByPaieEau", query = "SELECT o FROM Occupation o WHERE o.paieEau = :paieEau"),
-        @NamedQuery(name = "Occupation.findByPaieElectricite", query = "SELECT o FROM Occupation o WHERE o.paieElectricite = :paieElectricite")})
+@Table(database = Maisonier.class)
 public class Occupation extends BaseModel {
 
 
@@ -52,10 +27,10 @@ public class Occupation extends BaseModel {
 
     @NotNull
     @Column(name = "date_entree")
-    @Temporal(TemporalType.DATE)
+
     private Date dateEntree;
     @Column(name = "date_sortie")
-    @Temporal(TemporalType.DATE)
+
     private Date dateSortie;
     @Size(max = 255)
     @Column(name = "description", length = 255)
@@ -312,31 +287,6 @@ public class Occupation extends BaseModel {
 
     public void setCompteList(List<Compte> compteList) {
         this.compteList = compteList;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Occupation)) {
-            return false;
-        }
-        Occupation other = (Occupation) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "entites.Occupation[ id=" + id + " ]";
     }
 
 }

@@ -5,30 +5,20 @@
  */
 package com.flysoft.maisonier.entites;
 
+
+import android.support.annotation.Size;
+
+import com.flysoft.maisonier.dataBase.Maisonier;
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.NotNull;
+import com.raizlabs.android.dbflow.annotation.OneToMany;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-
-/**
- * @author nono
- */
-@Entity
-@Table(name = "rolle", catalog = "maisonier", schema = "public")
-@XmlRootElement
-@NamedQueries({
-        @NamedQuery(name = "Rolle.findAll", query = "SELECT r FROM Rolle r"),
-        @NamedQuery(name = "Rolle.findById", query = "SELECT r FROM Rolle r WHERE r.id = :id"),
-        @NamedQuery(name = "Rolle.findByEtat", query = "SELECT r FROM Rolle r WHERE r.etat = :etat"),
-        @NamedQuery(name = "Rolle.findByNom", query = "SELECT r FROM Rolle r WHERE r.nom = :nom")})
+@Table(database = Maisonier.class)
 public class Rolle extends BaseModel {
 
 
@@ -111,30 +101,4 @@ public class Rolle extends BaseModel {
     public void setRolePrivilegeList(List<RolePrivilege> rolePrivilegeList) {
         this.rolePrivilegeList = rolePrivilegeList;
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Rolle)) {
-            return false;
-        }
-        Rolle other = (Rolle) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "entites.Rolle[ id=" + id + " ]";
-    }
-
 }

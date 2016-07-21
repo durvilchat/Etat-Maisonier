@@ -5,26 +5,15 @@
  */
 package com.flysoft.maisonier.entites;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
+import android.support.annotation.Size;
 
-/**
- * @author nono
- */
-@Entity
-@Table(name = "contrat_rubrique", catalog = "maisonier", schema = "public")
-@XmlRootElement
-@NamedQueries({
-        @NamedQuery(name = "ContratRubrique.findAll", query = "SELECT c FROM ContratRubrique c"),
-        @NamedQuery(name = "ContratRubrique.findById", query = "SELECT c FROM ContratRubrique c WHERE c.id = :id"),
-        @NamedQuery(name = "ContratRubrique.findByValeur", query = "SELECT c FROM ContratRubrique c WHERE c.valeur = :valeur")})
+import com.flysoft.maisonier.dataBase.Maisonier;
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+
+@Table(database = Maisonier.class)
 public class ContratRubrique extends BaseModel {
 
 
@@ -78,31 +67,6 @@ public class ContratRubrique extends BaseModel {
 
     public void setRubrique(Rubrique rubrique) {
         this.rubrique = rubrique;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ContratRubrique)) {
-            return false;
-        }
-        ContratRubrique other = (ContratRubrique) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "entites.ContratRubrique[ id=" + id + " ]";
     }
 
 }

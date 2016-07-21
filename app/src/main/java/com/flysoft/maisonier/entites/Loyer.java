@@ -5,37 +5,18 @@
  */
 package com.flysoft.maisonier.entites;
 
+import android.support.annotation.Size;
+
+import com.flysoft.maisonier.dataBase.Maisonier;
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.NotNull;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+
 import java.util.Date;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-
-/**
- * @author nono
- */
-@Entity
-@Table(name = "loyer", catalog = "maisonier", schema = "public", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"mois", "occupation"})})
-@XmlRootElement
-@NamedQueries({
-        @NamedQuery(name = "Loyer.findAll", query = "SELECT l FROM Loyer l"),
-        @NamedQuery(name = "Loyer.findById", query = "SELECT l FROM Loyer l WHERE l.id = :id"),
-        @NamedQuery(name = "Loyer.findByDatePaiement", query = "SELECT l FROM Loyer l WHERE l.datePaiement = :datePaiement"),
-        @NamedQuery(name = "Loyer.findByMontantPayer", query = "SELECT l FROM Loyer l WHERE l.montantPayer = :montantPayer"),
-        @NamedQuery(name = "Loyer.findByObservation", query = "SELECT l FROM Loyer l WHERE l.observation = :observation")})
+@Table(database = Maisonier.class)
 public class Loyer extends BaseModel {
 
 
@@ -43,7 +24,7 @@ public class Loyer extends BaseModel {
     @Column(name = "id")
     private Integer id;
     @Column(name = "date_paiement")
-    @Temporal(TemporalType.DATE)
+
     private Date datePaiement;
 
     @NotNull
@@ -129,29 +110,6 @@ public class Loyer extends BaseModel {
         this.remise = remise;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Loyer)) {
-            return false;
-        }
-        Loyer other = (Loyer) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "entites.Loyer[ id=" + id + " ]";
-    }
 
 }

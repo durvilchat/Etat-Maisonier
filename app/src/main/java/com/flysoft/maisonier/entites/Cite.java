@@ -5,38 +5,20 @@
  */
 package com.flysoft.maisonier.entites;
 
+
+import android.support.annotation.Size;
+
+import com.flysoft.maisonier.dataBase.Maisonier;
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.NotNull;
+import com.raizlabs.android.dbflow.annotation.OneToMany;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-
-/**
- * @author nono
- */
-@Entity
-@Table(name = "cite", catalog = "maisonier", schema = "public")
-@XmlRootElement
-@NamedQueries({
-        @NamedQuery(name = "Cite.findAll", query = "SELECT c FROM Cite c"),
-        @NamedQuery(name = "Cite.findById", query = "SELECT c FROM Cite c WHERE c.id = :id"),
-        @NamedQuery(name = "Cite.findByDescription", query = "SELECT c FROM Cite c WHERE c.description = :description"),
-        @NamedQuery(name = "Cite.findByEmail", query = "SELECT c FROM Cite c WHERE c.email = :email"),
-        @NamedQuery(name = "Cite.findByEtat", query = "SELECT c FROM Cite c WHERE c.etat = :etat"),
-        @NamedQuery(name = "Cite.findByNomCite", query = "SELECT c FROM Cite c WHERE c.nomCite = :nomCite"),
-        @NamedQuery(name = "Cite.findByPoliceCite", query = "SELECT c FROM Cite c WHERE c.policeCite = :policeCite"),
-        @NamedQuery(name = "Cite.findByPoliceContact", query = "SELECT c FROM Cite c WHERE c.policeContact = :policeContact"),
-        @NamedQuery(name = "Cite.findByPoliceDescription", query = "SELECT c FROM Cite c WHERE c.policeDescription = :policeDescription"),
-        @NamedQuery(name = "Cite.findBySiege", query = "SELECT c FROM Cite c WHERE c.siege = :siege"),
-        @NamedQuery(name = "Cite.findByTels", query = "SELECT c FROM Cite c WHERE c.tels = :tels")})
+@Table(database = Maisonier.class)
 public class Cite extends BaseModel {
 
 
@@ -188,29 +170,6 @@ public class Cite extends BaseModel {
         this.bailleur = bailleur;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Cite)) {
-            return false;
-        }
-        Cite other = (Cite) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "entites.Cite[ id=" + id + " ]";
-    }
 
 }

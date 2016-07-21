@@ -5,31 +5,19 @@
  */
 package com.flysoft.maisonier.entites;
 
+import android.support.annotation.Size;
+
+import com.flysoft.maisonier.dataBase.Maisonier;
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.NotNull;
+import com.raizlabs.android.dbflow.annotation.OneToMany;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-
-/**
- * @author nono
- */
-@Entity
-@Table(name = "type_caution", catalog = "maisonier", schema = "public", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"libelle"})})
-@XmlRootElement
-@NamedQueries({
-        @NamedQuery(name = "TypeCaution.findAll", query = "SELECT t FROM TypeCaution t"),
-        @NamedQuery(name = "TypeCaution.findById", query = "SELECT t FROM TypeCaution t WHERE t.id = :id"),
-        @NamedQuery(name = "TypeCaution.findByLibelle", query = "SELECT t FROM TypeCaution t WHERE t.libelle = :libelle")})
+@Table(database = Maisonier.class)
 public class TypeCaution extends BaseModel {
 
 
@@ -80,30 +68,4 @@ public class TypeCaution extends BaseModel {
     public void setCautionList(List<Caution> cautionList) {
         this.cautionList = cautionList;
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TypeCaution)) {
-            return false;
-        }
-        TypeCaution other = (TypeCaution) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "entites.TypeCaution[ id=" + id + " ]";
-    }
-
 }
